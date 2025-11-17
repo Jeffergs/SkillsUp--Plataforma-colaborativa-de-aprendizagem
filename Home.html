@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SkillUp - Transforme conhecimento em oportunidade</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="Home.css" />
+
+</head>
+<body>
+
+<video autoplay muted loop playsinline id="bg-video">
+    <source src="./img/video_fundo.mp4" type="video/mp4" />
+</video>
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+<div class="container-fluid nav-grid">
+
+    <div class="nav-col-left"></div>
+    <div class="navbar-center-group d-flex align-items-center justify-content-center">
+    <a class="nav-link" href="#">Início</a>
+    <a class="nav-link" href="#">Como Funciona</a>
+    <a class="navbar-center d-flex align-items-center" href="#">
+        <img src="./img/logo.png" class="logo-center-img" alt="Logo SkillUp">
+        <span class="logo-text">SkillsUp</span>
+    </a>
+
+    <a class="nav-link" href="#">Cadastro</a>
+    <a class="nav-link" href="#">Agendamento</a>
+    </div>
+
+    <div class="nav-col-right">
+    <a class="btn btn-conta" href="#">Conta</a>
+    </div>
+
+</div>
+</nav>
+
+<section class="hero-section">
+    
+    <div class="hero-inner">
+        
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="12000">
+        
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+            </div>
+
+            <div class="carousel-inner">
+
+                <!-- SLIDE 1 -->
+                <div class="carousel-item active">
+                    <h1 class="hero-title-main">Transforme conhecimento em oportunidade.</h1>
+
+                    <p class="hero-text">
+                        O <strong>SkillsUp</strong> é uma plataforma de troca de conhecimento com moeda interna,
+                        onde ensinar gera créditos e aprender consome créditos — sem depender de dinheiro.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="#" class="hero-btn hero-btn-primary">Começar Agora</a>
+                        <a href="#" class="hero-btn hero-btn-secondary">Como Funciona</a>
+                    </div>
+
+                    <span class="ods-text">ALINHADO AOS ODS 4, 8, 9 E 10 DA ONU</span>
+                </div>
+
+                <!-- SLIDE 2 -->
+                <div class="carousel-item">
+                    <h2 class="hero-title-secondary">O futuro do trabalho já começou!</h2>
+                    <p class="hero-text">
+                        Em um cenário de automação e IA, quem não se requalifica rapidamente fica para trás.
+                        A SkillsUp cria uma economia colaborativa onde o conhecimento vira moeda e o
+                        aprendizado se torna acessível para todos.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#" class="hero-btn hero-btn-primary">Começar Agora</a>
+                        <a href="#" class="hero-btn hero-btn-secondary">Como Funciona</a>
+                    </div>
+                </div>
+
+                <!-- SLIDE 3 -->
+                <div class="carousel-item">
+                    <h2 class="hero-title-secondary">Impacto e conexão com os ODS</h2>
+                    <p class="hero-text">A SkillsUp conecta tecnologia, inclusão e colaboração:</p>
+                    <p class="hero-text">Educação de Qualidade | Trabalho Decente | Inovação | Redução das Desigualdades 
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#" class="hero-btn hero-btn-primary">Começar Agora</a>
+                        <a href="#" class="hero-btn hero-btn-secondary">Como Funciona</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SETAS DO CARROSSEL -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
