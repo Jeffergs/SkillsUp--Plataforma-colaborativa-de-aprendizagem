@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Cadastro.css">
+        <title>Seu Perfil</title>
+</head>
+<body>
+
+<div class="gradient-bg d-flex justify-content-center align-items-center vh-100">
+    <div class="container text-center">
+        <a href="#" class="btn btn-dark btn-sm mb-3">VOLTAR</a>
+        <div class="card p-4 mx-auto" style="max-width: 600px;">
+            <h3 class="mb-3">Seu Perfil</h3>
+            <div class="mb-3 text-start">
+                <label class="form-label">Nome Completo</label>
+                <input type="text" class="form-control" id="nome" placeholder="Nome...">
+                <div class="invalid-feedback">Preencha este campo.</div>
+            </div>
+            <div class="mb-3 text-start">
+                <label class="form-label">Áreas que quer aprender</label>
+                <input type="text" class="form-control" id="aprender" placeholder="Ex. Programação, Design, Idiomas">
+                <div class="invalid-feedback">Preencha este campo.</div>
+            </div>
+            <div class="mb-3 text-start">
+                <label class="form-label">Áreas que pode ensinar</label>
+                <input type="text" class="form-control" id="ensinar" placeholder="Ex. Matemática, Música, Marketing">
+                <div class="invalid-feedback">Preencha este campo.</div>
+            </div>
+            <button class="btn btn-primary w-100" id="salvarBtn">Salvar</button>
+        </div>
+        <div class="mt-4">
+            <span class="badge bg-warning p-3 fs-5">
+                Skills DISPONÍVEIS: <span id="creditos">0</span>
+            </span>
+        </div>
+
+    </div>
+</div>
+
+<!-- POPUP -->
+<div class="modal fade" id="creditModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center p-3">
+        <h5 class="mb-2">Perfil salvo!</h5>
+        <p><strong>VOCÊ GANHOU CINCO CRÉDITOS</strong></p>
+        <button class="btn btn-success" data-bs-dismiss="modal">OK</button>
+    </div>
+    </div>
+</div>
+
+<div class="tela-escolha-bg d-flex justify-content-center align-items-center vh-100">
+    <div class="card escolha-card p-4 text-center">
+        <h3 class="fw-semibold text-primary mb-4">
+            <span id="nomeUsuario"></span>, o que deseja fazer?
+        </h3>
+        <div class="botoes-centro">
+            <a href="#" class="btn escolha-btn btn-grad-1">APRENDER ALGO NOVO</a>
+            <a href="#" class="btn escolha-btn btn-grad-2">ENSINAR ALGO</a>
+            <a href="#" class="btn escolha-btn btn-grad-3">MINHAS AULAS</a>
+        </div>
+        <p class="mt-4 small fw-semibold">
+            Dica: Ensine para continuar aprendendo!
+        </p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/Cadastro.js"></script>
+</body>
+</html>

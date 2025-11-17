@@ -1,0 +1,145 @@
+.gradient-bg {
+    background: linear-gradient(
+        90deg,
+        rgba(102, 126, 234, 1) 0%,
+        rgba(118, 75, 162, 1) 100%
+    );
+}
+
+/* BOTÃO VOLTAR */
+.btn-dark.btn-sm {
+    background: linear-gradient(90deg, #6c63ff, #2dd4bf) !important;
+    border:#fff;
+    color: #fff;
+    margin-right: 500px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.btn-dark.btn-sm:hover {
+    opacity: 0.9;
+}
+
+/* CARD */
+.card {
+    border-radius: 20px !important;
+    box-shadow: 0 0 12px #00000025;
+}
+
+/* INPUTS */
+.form-control {
+    border-radius: 20px !important;
+    padding: 12px !important;
+    border: 1px solid #ccc;
+}
+
+/* Erro do Bootstrap quando campo não preenchido */
+.form-control.is-invalid {
+    border: 2px solid red !important;
+    background-color: #ffeaea !important;
+}
+
+/* BOTÃO SALVAR */
+#salvarBtn {
+    border-radius: 20px !important;
+    padding: 12px !important;
+    font-size: 16px !important;
+    background: linear-gradient(90deg, #6c63ff, #2dd4bf) !important;
+    border: none !important;
+    color: white !important;
+}
+#salvarBtn:hover {
+    opacity: 0.9;
+}
+
+/* CONTADOR */
+.badge {
+        background: linear-gradient(180deg, #997300, #ffc000) !important;
+    border: none !important;
+    color: #fff !important;
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+    padding: 15px 25px !important;
+    font-size: 22px !important;
+    border-radius: 40px !important;
+}
+
+.badge:hover {
+    opacity: 0.85;
+}
+
+/* POPUP */
+.modal-content {
+    border-radius: 20px !important;
+    padding: 25px !important;
+}
+
+/* Fundo da tela */
+.tela-escolha-bg {
+    background: linear-gradient(135deg, #4a6fd3, #7b2cd4, #00e6c7);
+    background-size: cover;
+}
+
+/* Card central */
+.escolha-card {
+    max-width: 600px;
+    width: 90%;
+    border-radius: 25px;
+    align-items: center;
+}
+
+/* Centraliza o grupo de botões */
+.botoes-centro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;     
+    gap: 15px;               
+}
+
+.escolha-btn {
+    padding: 14px 30px !important; 
+    font-weight: 700;
+    color: #fff !important;
+    border-radius: 12px;
+    border: none;
+    text-align: center;
+
+    width: 260px;     
+    max-width: 100%;  
+}
+
+.escolha-btn:hover{
+    opacity: 0.9;
+}
+
+.btn-grad-1 {
+    background: linear-gradient(45deg, #7f30cb, #01dcba);
+}
+.btn-grad-2 {
+    background: linear-gradient(90deg, #5170ff, #ff66c4);
+}
+.btn-grad-3 {
+    background: linear-gradient(90deg, #5de0e6, #004aad);
+}
+
+/* --- Esconde a tela de escolha por padrão --- */
+.tela-escolha-bg {
+    display: none;
+}
+
+/* quando for mostrado via JS vamos usar a classe bootstrap d-flex */
+/* Estilos extras já enviados antes */
+.escolha-card {
+    max-width: 600px;
+    width: 90%;
+    border-radius: 25px;
+}
+
+@media (max-width: 576px) {
+    .card {
+        padding: 20px !important;
+    }
+}
