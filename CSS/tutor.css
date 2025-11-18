@@ -1,0 +1,111 @@
+body {
+  background: linear-gradient(90deg, #673ab7, #03a9f4);
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.navbar-brand img {
+  height: 40px;
+}
+
+.content-box {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 1100px;
+  margin: 40px auto;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.tutor-card {
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  background: #fff;
+  transition: transform 0.3s;
+}
+
+.tutor-card:hover {
+  transform: scale(1.07);
+}
+
+.btn-agendar {
+  background-color: #0d6efd;
+  color: white;
+  border-radius: 10px;  
+}
+
+.btn-agendar:hover {
+  background-color: #03a9f4;
+  color: rgb(255, 255, 255);
+}
+
+.horario-btn.ocupado {
+  background-color: #ffb3b3 !important;
+  border-color: #cc0000 !important;
+  color: #660000 !important;
+  pointer-events: none;
+  cursor: not-allowed !important;
+  opacity: 0.8;
+}
+
+.top-info {
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.credit-box {
+  background: #ffd54f;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.modal-content {
+  border-radius: 20px;
+  border: 2px solid black;
+}
+
+.confirm-btn {
+  background: linear-gradient(90deg, #673ab7, #03a9f4);
+  border-radius: 10px;
+}
+
+/* ANIMAÇÕES */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-up {
+  animation: slideUp 0.8s ease-out;
+}
+
+.modal-animate {
+  animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
