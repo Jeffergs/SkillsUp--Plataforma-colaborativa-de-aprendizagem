@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
+
     // elementos principais
-    const profileWrapper = document.querySelector('.gradient-bg'); // bloco do formulário
-    const escolhaWrapper = document.querySelector('.tela-escolha-bg'); // bloco escolha
+    const profileWrapper = document.querySelector('.gradient-bg'); 
+    const escolhaWrapper = document.querySelector('.tela-escolha-bg'); 
     const nomeSpan = document.getElementById('nomeUsuario');
 
     const nome = document.getElementById("nome");
@@ -12,26 +13,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const creditModalEl = document.getElementById('creditModal');
     const creditBadge = document.getElementById("creditos");
 
-    let creditos = 0;
-
-    // 🔄 SEMPRE COMEÇA NA TELA DO FORMULÁRIO
-    if (profileWrapper) {
-        profileWrapper.classList.remove('d-none');
-        profileWrapper.classList.add('d-flex');
-    }
-    if (escolhaWrapper) {
-        escolhaWrapper.style.display = 'none';
-        escolhaWrapper.classList.add('d-none');
-    }
-
     // Função para mostrar a tela de escolha
     function mostrarEscolha() {
-        // atualiza o nome no título
         const n = localStorage.getItem("nomeUsuario") || "Usuário";
         if (nomeSpan) nomeSpan.textContent = n;
 
-        // esconde formulário e mostra escolha
         if (profileWrapper) profileWrapper.classList.add('d-none');
+
         if (escolhaWrapper) {
             escolhaWrapper.style.display = '';
             escolhaWrapper.classList.remove('d-none');
@@ -41,16 +29,37 @@ document.addEventListener("DOMContentLoaded", function () {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // 🔥🔥 SE O USUÁRIO JÁ FEZ O CADASTRO → PULA O FORMULÁRIO
+    const jaCadastrado = localStorage.getItem("nomeUsuario");
+
+    if (jaCadastrado) {
+        // oculta formulário
+        if (profileWrapper) profileWrapper.classList.add('d-none');
+
+        // mostra tela de escolha
+        mostrarEscolha();
+        return; // impede que o JS abaixo rode
+    }
+
+    if (profileWrapper) {
+        profileWrapper.classList.remove('d-none');
+        profileWrapper.classList.add('d-flex');
+    }
+
+    if (escolhaWrapper) {
+        escolhaWrapper.style.display = 'none';
+        escolhaWrapper.classList.add('d-none');
+    }
+
     // Botão salvar
     if (salvarBtn) {
         salvarBtn.addEventListener("click", function () {
+
             const campos = [nome, aprender, ensinar];
             let vazio = false;
 
-            // limpa erros anteriores
             campos.forEach(c => c?.classList.remove("is-invalid"));
 
-            // valida
             campos.forEach(c => {
                 if (!c || c.value.trim() === "") {
                     c.classList.add("is-invalid");
@@ -59,20 +68,18 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             if (vazio) {
-                const primeiro = campos.find(c => c?.classList.contains("is-invalid"));
-                if (primeiro) primeiro.focus();
+                const primeiro = campos.find(c => c.classList.contains("is-invalid"));
+                primeiro?.focus();
                 return;
             }
 
             // salva nome e créditos
-            const nomeValor = nome.value.trim();
-            localStorage.setItem("nomeUsuario", nomeValor);
+            localStorage.setItem("nomeUsuario", nome.value.trim());
+            localStorage.setItem("creditos", "5");
 
-            creditos = 5;
-            localStorage.setItem("creditos", String(creditos));
-            if (creditBadge) creditBadge.textContent = creditos;
+            if (creditBadge) creditBadge.textContent = "5";
 
-            // mostra modal (caso exista)
+            // mostra modal caso exista
             if (creditModalEl) {
                 const modal = new bootstrap.Modal(creditModalEl);
                 modal.show();
@@ -91,10 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // remove erro ao digitar
     ["nome", "aprender", "ensinar"].forEach(id => {
         const el = document.getElementById(id);
-        if (el) {
-            el.addEventListener("input", function () {
-                this.classList.remove("is-invalid");
-            });
-        }
+        if (el) el.addEventListener("input", () => el.classList.remove("is-invalid"));
     });
+
 });
