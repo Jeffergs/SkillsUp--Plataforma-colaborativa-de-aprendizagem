@@ -1,123 +1,111 @@
-// ====================================================
-//  🔒 BLOQUEIO COM POP-UP MODAL E REDIRECIONAMENTO AUTOMÁTICO
-// ====================================================
-(function bloquearTelaComModal() {
-  const paginasProtegidas = ["tutor.html", "ofereca_aula.html", "agendamentos.html"];
-  
-  // Pega o nome do arquivo sem query string
-  let arquivoAtual = window.location.pathname.split("/").pop().toLowerCase();
-  arquivoAtual = arquivoAtual.split("?")[0];
+// ==========================
+// global.js - bloqueio universal
+// ==========================
 
-  const nome = localStorage.getItem("nomeUsuario");
-  const modal = document.getElementById("modalBloqueio");
+// Lista de páginas que exigem login
+const paginasProtegidas = ["tutor.html", "ofereca_aula.html", "agendamentos.html"];
+let arquivoAtual = window.location.pathname.split("/").pop().split("?")[0].toLowerCase();
+if (arquivoAtual === "") arquivoAtual = "index.html";
 
-  if (paginasProtegidas.includes(arquivoAtual) && !nome) {
-    if (modal) modal.style.display = "flex";
+// Verifica se o usuário está logado
+const nome = localStorage.getItem("nomeUsuario");
 
-    const bodyChildren = Array.from(document.body.children);
-    bodyChildren.forEach(el => {
-      if (el.id !== "modalBloqueio") {
-        el.style.display = "none";
-      }
-    });
+if (paginasProtegidas.includes(arquivoAtual) && !nome) {
+  // Trava tela imediatamente
+  document.documentElement.style.display = "none";
 
-    setTimeout(() => {
-      window.location.replace("/Cadastro.html");
-    }, 2000);
-  } else {
-    document.body.style.display = "block";
-  }
-})();
+  // Cria modal dinamicamente
+  const modal = document.createElement("div");
+  modal.id = "modalBloqueio";
+  modal.style.cssText = `
+    position: fixed; z-index: 9999; top:0; left:0; width:100%; height:100%;
+    background-color: rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center;
+  `;
+  modal.innerHTML = `
+    <div style="background:#fff; padding:2rem; border-radius:10px; text-align:center; max-width:400px; width:90%; font-family:sans-serif;">
+      <h2 style="margin-bottom:1rem; color:#d9534f;">Atenção!</h2>
+      <p style="margin-bottom:1rem;">Você não tem acesso a esta página.</p>
+      <p style="margin-bottom:0;">Redirecionando para a tela de cadastro...</p>
+    </div>
+  `;
+  document.body.appendChild(modal);
 
-// ====================================================
-//  SISTEMA DE CRÉDITOS
-// ====================================================
-(function () {
-  console.log('[global.js] carregando...');
+  // Mostra modal imediatamente
+  document.documentElement.style.display = "block";
 
-  const CreditSystem = {
-    key: 'creditos',
+  // Redireciona automaticamente
+  setTimeout(() => {
+    window.location.replace("/Cadastro.html");
+  }, 2000);
+}
 
-    get() {
-      const value = Number(localStorage.getItem(this.key));
-      return Number.isFinite(value) ? value : 0;
-    },
+// ==========================
+// Sistema de Créditos
+// ==========================
+const CreditSystem = {
+  key: 'creditos',
 
-    set(value) {
-      const novoValor = Math.max(0, Number(value));
-      localStorage.setItem(this.key, String(novoValor));
-      this.updateBadge();
-      console.log('[global.js] set ->', novoValor);
-      return novoValor;
-    },
+  get() {
+    const value = Number(localStorage.getItem(this.key));
+    return Number.isFinite(value) ? value : 0;
+  },
 
-    add(amount) {
-      return this.set(this.get() + Number(amount));
-    },
+  set(value) {
+    const novoValor = Math.max(0, Number(value));
+    localStorage.setItem(this.key, String(novoValor));
+    this.updateBadge();
+    return novoValor;
+  },
 
-    remove(amount) {
-      return this.set(this.get() - Number(amount));
-    },
+  add(amount) { return this.set(this.get() + Number(amount)); },
+  remove(amount) { return this.set(this.get() - Number(amount)); },
 
-    updateBadge() {
-      const valor = this.get();
-      const elementos = [
-        ...document.querySelectorAll('#creditos'),
-        ...document.querySelectorAll('#contadorCreditos')
-      ];
-      elementos.forEach(el => (el.textContent = valor));
-    },
+  updateBadge() {
+    const valor = this.get();
+    const elementos = [
+      ...document.querySelectorAll('#creditos'),
+      ...document.querySelectorAll('#contadorCreditos')
+    ];
+    elementos.forEach(el => el.textContent = valor);
+  },
 
-    init() {
-      console.log('[global.js] init -> créditos atuais:', this.get());
-      this.updateBadge();
-    }
-  };
+  init() { this.updateBadge(); }
+};
 
-  // Expor globalmente
-  window.CreditSystem = CreditSystem;
-  window.adicionarCreditos = qtd => CreditSystem.add(qtd);
-  window.removerCreditos = qtd => CreditSystem.remove(qtd);
-  window.setCreditos = qtd => CreditSystem.set(qtd);
-  window.getCreditos = () => CreditSystem.get();
+window.CreditSystem = CreditSystem;
+window.adicionarCreditos = qtd => CreditSystem.add(qtd);
+window.removerCreditos = qtd => CreditSystem.remove(qtd);
+window.setCreditos = qtd => CreditSystem.set(qtd);
+window.getCreditos = () => CreditSystem.get();
+document.addEventListener("DOMContentLoaded", () => CreditSystem.init());
 
-  // Inicializa no carregamento da página
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => CreditSystem.init());
-  } else {
-    CreditSystem.init();
-  }
-
-  console.log('[global.js] pronto. Funções disponíveis: adicionarCreditos, removerCreditos, getCreditos, setCreditos');
-})();
-
-
-// ====================================================
-//  🔐 FUNÇÃO PARA BOTÕES QUE REDIRECIONAM
-// ====================================================
+// ==========================
+// Função para botões
+// ==========================
 function verificarLogin(destino) {
   const nome = localStorage.getItem("nomeUsuario");
-  const modal = document.getElementById("modalBloqueio");
 
   if (!nome) {
-    // Mostra modal
-    if (modal) modal.style.display = "flex";
-
-    // Esconde o restante da página
-    const bodyChildren = Array.from(document.body.children);
-    bodyChildren.forEach(el => {
-      if (el.id !== "modalBloqueio") {
-        el.style.display = "none";
-      }
-    });
-
-    // Redireciona automaticamente
-    setTimeout(() => {
-      window.location.href = "/Cadastro.html";
-    }, 2000);
+    const modalExistente = document.getElementById("modalBloqueio");
+    if (!modalExistente) {
+      const modal = document.createElement("div");
+      modal.id = "modalBloqueio";
+      modal.style.cssText = `
+        position: fixed; z-index: 9999; top:0; left:0; width:100%; height:100%;
+        background-color: rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center;
+      `;
+      modal.innerHTML = `
+        <div style="background:#fff; padding:2rem; border-radius:10px; text-align:center; max-width:400px; width:90%; font-family:sans-serif;">
+          <h2 style="margin-bottom:1rem; color:#d9534f;">Atenção!</h2>
+          <p style="margin-bottom:1rem;">Você não tem acesso a esta página.</p>
+          <p style="margin-bottom:0;">Redirecionando para a tela de cadastro...</p>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+    setTimeout(() => window.location.href = "/Cadastro.html", 2000);
     return;
   }
 
-  // Usuário autorizado
   window.location.href = destino;
 }

@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    // elementos principais
+    // ELEMENTOS PRINCIPAIS
     const profileWrapper = document.querySelector('.gradient-bg'); 
     const escolhaWrapper = document.querySelector('.tela-escolha-bg'); 
     const nomeSpan = document.getElementById('nomeUsuario');
@@ -13,7 +13,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const creditModalEl = document.getElementById('creditModal');
     const creditBadge = document.getElementById("creditos");
 
-    // Função para mostrar a tela de escolha
+    // ========================== INICIALIZA CRÉDITOS ==========================
+    if (!localStorage.getItem("creditos")) {
+        localStorage.setItem("creditos", "0"); // novos usuários começam com 0
+    }
+    if (creditBadge) creditBadge.textContent = localStorage.getItem("creditos");
+
+    // ========================== FUNÇÃO PARA MOSTRAR TELA DE ESCOLHA ==========================
     function mostrarEscolha() {
         const n = localStorage.getItem("nomeUsuario") || "Usuário";
         if (nomeSpan) nomeSpan.textContent = n;
@@ -29,16 +35,13 @@ document.addEventListener("DOMContentLoaded", function () {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 🔥🔥 SE O USUÁRIO JÁ FEZ O CADASTRO → PULA O FORMULÁRIO
+    // ========================== SE JÁ CADASTRADO → PULA O FORMULÁRIO ==========================
     const jaCadastrado = localStorage.getItem("nomeUsuario");
 
     if (jaCadastrado) {
-        // oculta formulário
         if (profileWrapper) profileWrapper.classList.add('d-none');
-
-        // mostra tela de escolha
         mostrarEscolha();
-        return; // impede que o JS abaixo rode
+        return;
     }
 
     if (profileWrapper) {
@@ -51,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
         escolhaWrapper.classList.add('d-none');
     }
 
-    // Botão salvar
+    // ========================== BOTÃO SALVAR ==========================
     if (salvarBtn) {
         salvarBtn.addEventListener("click", function () {
 
@@ -73,13 +76,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            // salva nome e créditos
+            // SALVA NOME
             localStorage.setItem("nomeUsuario", nome.value.trim());
-            localStorage.setItem("creditos", "5");
 
+            // DÁ 5 CRÉDITOS AO USUÁRIO CADASTRADO
+            localStorage.setItem("creditos", "5");
             if (creditBadge) creditBadge.textContent = "5";
 
-            // mostra modal caso exista
+            // MOSTRA MODAL DE CRÉDITOS CASO EXISTA
             if (creditModalEl) {
                 const modal = new bootstrap.Modal(creditModalEl);
                 modal.show();
@@ -95,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // remove erro ao digitar
+    // ========================== REMOVE ERRO AO DIGITAR ==========================
     ["nome", "aprender", "ensinar"].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.addEventListener("input", () => el.classList.remove("is-invalid"));
