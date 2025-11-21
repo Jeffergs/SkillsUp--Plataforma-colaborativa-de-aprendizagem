@@ -1,20 +1,5 @@
-// ==========================
-// global.js - bloqueio universal
-// ==========================
-
-// Lista de páginas que exigem login
-const paginasProtegidas = ["tutor.html", "ofereca_aula.html", "agendamentos.html"];
-let arquivoAtual = window.location.pathname.split("/").pop().split("?")[0].toLowerCase();
-if (arquivoAtual === "") arquivoAtual = "index.html";
-
-// Verifica se o usuário está logado
-const nome = localStorage.getItem("nomeUsuario");
-
-if (paginasProtegidas.includes(arquivoAtual) && !nome) {
-  // Trava tela imediatamente
-  document.documentElement.style.display = "none";
-
-  // Cria modal dinamicamente
+function mostrarModalComContagem(segundos, mensagem, destino) {
+  // Cria modal
   const modal = document.createElement("div");
   modal.id = "modalBloqueio";
   modal.style.cssText = `
@@ -24,19 +9,38 @@ if (paginasProtegidas.includes(arquivoAtual) && !nome) {
   modal.innerHTML = `
     <div style="background:#fff; padding:2rem; border-radius:10px; text-align:center; max-width:400px; width:90%; font-family:sans-serif;">
       <h2 style="margin-bottom:1rem; color:#d9534f;">Atenção!</h2>
-      <p style="margin-bottom:1rem;">Você não tem acesso a esta página.</p>
-      <p style="margin-bottom:0;">Redirecionando para a tela de cadastro...</p>
+      <p style="margin-bottom:1rem;">${mensagem}</p>
+      <p id="contadorModal" style="font-weight:bold; font-size:1.2rem; margin-top:1rem;">Redirecionando em ${segundos} segundos...</p>
     </div>
   `;
   document.body.appendChild(modal);
 
-  // Mostra modal imediatamente
-  document.documentElement.style.display = "block";
+  // Atualiza contagem regressiva a cada segundo
+  const contadorEl = document.getElementById("contadorModal");
+  let restante = segundos;
+  const intervalo = setInterval(() => {
+    restante--;
+    contadorEl.textContent = `Redirecionando em ${restante} segundos...`;
+    if (restante <= 0) {
+      clearInterval(intervalo);
+      window.location.href = destino;
+    }
+  }, 1000);
+}
 
-  // Redireciona automaticamente
-  setTimeout(() => {
-    window.location.replace("/Cadastro.html");
-  }, 2000);
+// ==========================
+// Bloqueio universal das páginas protegidas
+// ==========================
+const paginasProtegidas = ["tutor.html", "ofereca_aula.html", "agendamentos.html"];
+let arquivoAtual = window.location.pathname.split("/").pop().split("?")[0].toLowerCase();
+if (arquivoAtual === "") arquivoAtual = "index.html";
+
+const nome = localStorage.getItem("nomeUsuario");
+
+if (paginasProtegidas.includes(arquivoAtual) && !nome) {
+  document.documentElement.style.display = "none";
+  mostrarModalComContagem(3, "Você não tem acesso a esta página, estou te redirecionando para a tela de cadastro.", "/Cadastro.html");
+  document.documentElement.style.display = "block";
 }
 
 // ==========================
@@ -80,7 +84,7 @@ window.getCreditos = () => CreditSystem.get();
 document.addEventListener("DOMContentLoaded", () => CreditSystem.init());
 
 // ==========================
-// Função para botões
+// Função para botões de navegação com login
 // ==========================
 function verificarLogin(destino) {
   const nome = localStorage.getItem("nomeUsuario");
@@ -88,22 +92,8 @@ function verificarLogin(destino) {
   if (!nome) {
     const modalExistente = document.getElementById("modalBloqueio");
     if (!modalExistente) {
-      const modal = document.createElement("div");
-      modal.id = "modalBloqueio";
-      modal.style.cssText = `
-        position: fixed; z-index: 9999; top:0; left:0; width:100%; height:100%;
-        background-color: rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center;
-      `;
-      modal.innerHTML = `
-        <div style="background:#fff; padding:2rem; border-radius:10px; text-align:center; max-width:400px; width:90%; font-family:sans-serif;">
-          <h2 style="margin-bottom:1rem; color:#d9534f;">Atenção!</h2>
-          <p style="margin-bottom:1rem;">Você não tem acesso a esta página.</p>
-          <p style="margin-bottom:0;">Redirecionando para a tela de cadastro...</p>
-        </div>
-      `;
-      document.body.appendChild(modal);
+      mostrarModalComContagem(3, "Você não tem acesso a esta página.", "/Cadastro.html");
     }
-    setTimeout(() => window.location.href = "/Cadastro.html", 2000);
     return;
   }
 
