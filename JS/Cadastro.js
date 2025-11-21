@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (jaTemCadastro) {
             cadastroNav.textContent = "Perfil";
-            cadastroNav.href = "/agendamentos.html";
+            cadastroNav.href = "/Cadastro.html";
         }
     }
 
