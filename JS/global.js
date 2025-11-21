@@ -1,4 +1,37 @@
-// /JS/global.js - versão ajustada
+// ====================================================
+//  🔒 BLOQUEIO COM POP-UP MODAL E REDIRECIONAMENTO AUTOMÁTICO
+// ====================================================
+(function bloquearTelaComModal() {
+  const paginasProtegidas = ["tutor.html", "ofereca_aula.html", "agendamentos.html"];
+  
+  // Pega o nome do arquivo sem query string
+  let arquivoAtual = window.location.pathname.split("/").pop().toLowerCase();
+  arquivoAtual = arquivoAtual.split("?")[0];
+
+  const nome = localStorage.getItem("nomeUsuario");
+  const modal = document.getElementById("modalBloqueio");
+
+  if (paginasProtegidas.includes(arquivoAtual) && !nome) {
+    if (modal) modal.style.display = "flex";
+
+    const bodyChildren = Array.from(document.body.children);
+    bodyChildren.forEach(el => {
+      if (el.id !== "modalBloqueio") {
+        el.style.display = "none";
+      }
+    });
+
+    setTimeout(() => {
+      window.location.replace("/Cadastro.html");
+    }, 2000);
+  } else {
+    document.body.style.display = "block";
+  }
+})();
+
+// ====================================================
+//  SISTEMA DE CRÉDITOS
+// ====================================================
 (function () {
   console.log('[global.js] carregando...');
 
@@ -11,7 +44,7 @@
     },
 
     set(value) {
-      const novoValor = Math.max(0, Number(value)); // nunca abaixo de 0
+      const novoValor = Math.max(0, Number(value));
       localStorage.setItem(this.key, String(novoValor));
       this.updateBadge();
       console.log('[global.js] set ->', novoValor);
@@ -26,15 +59,12 @@
       return this.set(this.get() - Number(amount));
     },
 
-    // 🔥 Agora atualiza #creditos e #contadorCreditos
     updateBadge() {
       const valor = this.get();
-
       const elementos = [
         ...document.querySelectorAll('#creditos'),
         ...document.querySelectorAll('#contadorCreditos')
       ];
-
       elementos.forEach(el => (el.textContent = valor));
     },
 
@@ -51,7 +81,7 @@
   window.setCreditos = qtd => CreditSystem.set(qtd);
   window.getCreditos = () => CreditSystem.get();
 
-  // Garantir que rode no carregamento
+  // Inicializa no carregamento da página
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => CreditSystem.init());
   } else {
@@ -61,15 +91,33 @@
   console.log('[global.js] pronto. Funções disponíveis: adicionarCreditos, removerCreditos, getCreditos, setCreditos');
 })();
 
+
+// ====================================================
+//  🔐 FUNÇÃO PARA BOTÕES QUE REDIRECIONAM
+// ====================================================
 function verificarLogin(destino) {
-    const nome = localStorage.getItem("nomeUsuario");
+  const nome = localStorage.getItem("nomeUsuario");
+  const modal = document.getElementById("modalBloqueio");
 
-    if (!nome) {
-        alert("Você precisa estar logado para oferecer aulas!");
-        window.location.href = "Cadastro.html";
-        return;
-    }
+  if (!nome) {
+    // Mostra modal
+    if (modal) modal.style.display = "flex";
 
-    // autorizado
-    window.location.href = destino;
+    // Esconde o restante da página
+    const bodyChildren = Array.from(document.body.children);
+    bodyChildren.forEach(el => {
+      if (el.id !== "modalBloqueio") {
+        el.style.display = "none";
+      }
+    });
+
+    // Redireciona automaticamente
+    setTimeout(() => {
+      window.location.href = "/Cadastro.html";
+    }, 2000);
+    return;
+  }
+
+  // Usuário autorizado
+  window.location.href = destino;
 }
