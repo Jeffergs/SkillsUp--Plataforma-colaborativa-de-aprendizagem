@@ -1,9 +1,11 @@
-// ofereca_aula.js (trechos importantes)
+// ofereca_aula.js
+
 let horariosAulaSelecionados = [];
 
 function setHorarioAula(element) {
   const horarioSelecionado = element.textContent.trim();
   const index = horariosAulaSelecionados.indexOf(horarioSelecionado);
+
   if (index > -1) {
     element.classList.remove('selected');
     horariosAulaSelecionados.splice(index, 1);
@@ -11,16 +13,21 @@ function setHorarioAula(element) {
     element.classList.add('selected');
     horariosAulaSelecionados.push(horarioSelecionado);
   }
+
   console.log('[ofereca_aula.js] horários:', horariosAulaSelecionados);
 }
 
 function publicarAula() {
   console.log('[ofereca_aula.js] publicarAula chamado');
+
+  // Pegar todos os valores do formulário
+  const nomeTutor = document.getElementById('nomeTutor')?.value || '';
   const assuntoAula = document.getElementById('assuntoAula')?.value || '';
   const categoriaAula = document.getElementById('categoriaAula')?.value || '';
   const descricaoAula = document.getElementById('descricaoAula')?.value || '';
 
-  if (!assuntoAula || !descricaoAula) {
+  // Validação de campos obrigatórios
+  if (!nomeTutor || !assuntoAula || !descricaoAula) {
     alert('Por favor, preencha todos os campos!');
     return;
   }
@@ -30,10 +37,13 @@ function publicarAula() {
     return;
   }
 
+  // Recuperar aulas já publicadas do localStorage
   const aulasPublicadasArmazenadas = localStorage.getItem('aulasPublicadas');
   const aulasPublicadas = aulasPublicadasArmazenadas ? JSON.parse(aulasPublicadasArmazenadas) : [];
 
+  // Criar nova aula com o nome do tutor
   const novaAula = {
+    nomeTutor: nomeTutor,          // ← Adicionado para mostrar o tutor
     assunto: assuntoAula,
     categoria: categoriaAula,
     descricao: descricaoAula,
@@ -41,18 +51,20 @@ function publicarAula() {
     publicadoEm: new Date().toISOString()
   };
 
+  // Salvar no localStorage
   aulasPublicadas.push(novaAula);
   localStorage.setItem('aulasPublicadas', JSON.stringify(aulasPublicadas));
   console.log('[ofereca_aula.js] aula salva em localStorage', novaAula);
 
-  // limpar formulário
+  // Limpar formulário
+  document.getElementById('nomeTutor').value = '';
   document.getElementById('assuntoAula').value = '';
   document.getElementById('categoriaAula').selectedIndex = 0;
   document.getElementById('descricaoAula').value = '';
   document.querySelectorAll('.slot-btn.selected').forEach(btn => btn.classList.remove('selected'));
   horariosAulaSelecionados = [];
 
-  // ---- tentativa de adicionar crédito usando API global ----
+  // Tentativa de adicionar crédito
   try {
     if (typeof adicionarCreditos === 'function') {
       adicionarCreditos(1);
