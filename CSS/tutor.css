@@ -2,12 +2,9 @@
 body {
   background: linear-gradient(90deg, #673ab7, #03a9f4);
   min-height: 100vh;
-  font-family: Arial, sans-serif;
-  display: none;
-}
 
-body {
   display: none; /* esconde conteúdo até verificação */
+   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
 }
 
 #modalBloqueio {
@@ -45,6 +42,49 @@ body {
 
 .navbar-brand img {
   height: 40px;
+}
+
+
+
+
+
+/* Logo CENTRAL perfeita no desktop */
+@media (min-width: 992px) {
+  .navbar-brand {
+    position: absolute;
+    left: 46%;
+    transform: translateX(-50%);
+    z-index: 3; /* fica acima mas NÃO cobre conteúdo lateral */
+    pointer-events: none; /* não bloqueia clique nos links atrás */
+  }
+  .navbar-brand * {
+    pointer-events: auto; /* permite clicar na logo */
+  }
+}
+
+/* Mobile: logo vai para a direita */
+@media (max-width: 991px) {
+  .navbar-brand {
+    margin-left: auto !important;
+    margin-right: 10px !important;
+    position: static;
+    transform: none;
+
+     /* A navbar deixa de ter altura variável */
+  .navbar {
+    min-height: 70px !important;
+    position: relative;
+  }
+
+  /* Botão fica fixo independente da animação */
+  .nav-hamburger {
+    position: fixed !important;
+    top: 18px !important;
+    left: 12px !important;
+    transform: none !important;
+    z-index: 5000 !important;
+  }
+  }
 }
 
 /* CONTADOR */
