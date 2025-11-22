@@ -7,8 +7,8 @@
 .gradient-bg {
     background: linear-gradient(
         90deg,
-    rgba(102, 126, 234, 1) 0%,
-    rgba(118, 75, 162, 1) 100%
+        rgba(102, 126, 234, 1) 0%,
+        rgba(118, 75, 162, 1) 100%
     );
 }
 
@@ -97,7 +97,11 @@
 
 /* Fundo da tela */
 .tela-escolha-bg {
-    background: linear-gradient(135deg, #4a6fd3, #7b2cd4, #00e6c7);
+        background: linear-gradient(
+        90deg,
+        rgba(102, 126, 234, 1) 0%,
+        rgba(118, 75, 162, 1) 100%
+    );
     background-size: cover;
 }
 

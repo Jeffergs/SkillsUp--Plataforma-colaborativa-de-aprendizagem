@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     atualizarBadge();
-    verificarZeroCredits();
 
     // Mostra tela de escolha
     function mostrarEscolha() {
@@ -57,6 +56,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (jaCadastrado) {
         if (profileWrapper) profileWrapper.classList.add('d-none');
         mostrarEscolha();
+
+        // *** NÃO CHAMA O ALERT AQUI MAIS ***
     }
 
     // Salvar cadastro
@@ -119,7 +120,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (creditos < 0) creditos = 0;
         localStorage.setItem("creditos", creditos);
         atualizarBadge();
-        verificarZeroCredits(); // <<-- chama o alert imediatamente ao zerar
     };
+
+    // *** deixa a função pública para ser executada onde você quiser ***
+    window.verificarZeroCredits = verificarZeroCredits;
 
 });
