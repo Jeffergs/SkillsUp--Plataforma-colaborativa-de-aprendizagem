@@ -5,12 +5,11 @@ function excluirAulaAgendada(index) {
     aulasAgendadas.splice(index, 1);
     localStorage.setItem("aulasAgendadas", JSON.stringify(aulasAgendadas));
 
-    // --- AQUI: PERDE 1 CRÉDITO IGUAL A AULA PUBLICADA ---
-    removerCreditos(1);
-
-    agendarAula();
+    carregarAulasInscritas();
 
     alert("Você perdeu um crédito!");
+    // --- AQUI: PERDE 1 CRÉDITO IGUAL A AULA PUBLICADA ---
+    removerCreditos(1);
   }
 }
 
@@ -21,15 +20,14 @@ function excluirAulaPublicada(index) {
     aulasPublicadas.splice(index, 1);
     localStorage.setItem("aulasPublicadas", JSON.stringify(aulasPublicadas));
 
-    removerCreditos(1);
-
-    carregarAulas();
+    carregarAulasOferecidas();
 
     alert("Você perdeu um crédito!");
+    removerCreditos(1);
   }
 }
 
-function agendarAula() {
+function carregarAulasInscritas() {
   const aulasAgendadas =
     JSON.parse(localStorage.getItem("aulasAgendadas")) || [];
   const agendamentoAulasEl = document.getElementById("agendamentoAulas");
@@ -54,14 +52,15 @@ function agendarAula() {
           <h5 class="text-primary mb-2">
             <i class="bi bi-person-circle"></i> ${aula.tutor || "Tutor"}
           </h5>
+          
           ${
-            aula.descricao
+            aula.categoria
               ? `<p class="mb-1 text-muted">${aula.descricao}</p>`
               : ""
           }
           ${
             aula.categoria
-              ? `<span class="badge bg-secondary mb-2">${aula.categoria}</span>`
+              ? `<p class="mb-1 text-muted">${aula.categoria}</p>`
               : ""
           }
           <p class="mb-0">
@@ -85,7 +84,7 @@ function agendarAula() {
   });
 }
 
-function carregarAulas() {
+function carregarAulasOferecidas() {
   const aulasPublicadas =
     JSON.parse(localStorage.getItem("aulasPublicadas")) || [];
   const aulasPublicadasEl = document.getElementById("aulasPublicadas");
@@ -121,5 +120,6 @@ function carregarAulas() {
   });
 }
 
-agendarAula();
-carregarAulas();
+carregarAulasInscritas();
+carregarAulasOferecidas();
+carregarAulasInscritas();
