@@ -56,7 +56,7 @@ body {
 /* BADGE SKILLS COINS — alinhado à direita, igual ao botão Voltar */
 .skillsCoinsBox {
   position: absolute;
-  top: 90px;
+  top: 92px;
   right: 20px;        /* LADO OPOSTO AO BOTÃO VOLTAR */
   z-index: 9999;
 
@@ -64,7 +64,7 @@ body {
   align-items: center;
 
   background: linear-gradient(180deg, #997300, #ffc000);
-  border: 2px solid #000;
+
   border-radius: 40px;
 
   padding: 10px 20px;     /* mesmo padding do botão Voltar */
@@ -103,13 +103,13 @@ body {
 
 .voltar {
   position: absolute;
-  top: 90px;            /* mesmo alinhamento vertical do badge */
+  top: 95px;            /* mesmo alinhamento vertical do badge */
   left: 20px;           /* equivalente ao margin-right do badge */
   z-index: 9999;
   background: #fff;
-  border: 2px solid #000;
-  border-radius: 40px;
-  padding: 10px 20px;
+
+  border-radius: 8px;
+  padding: 5px 25px;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
