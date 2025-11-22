@@ -1,11 +1,150 @@
-/* --- seu CSS fornecido (mantive exatamente) --- */
 body {
-   background: linear-gradient(90deg, rgba(102, 126, 234, 1) 0%, rgba(118, 75, 162, 1) 100%);
+  font-family: 'Quicksand', 'Roboto', sans-serif;
+  background: linear-gradient(90deg, rgba(102, 126, 234, 1) 0%, rgba(118, 75, 162, 1) 100%);
   min-height: 100vh;
-
-  display: none; /* esconde conteúdo até verificação */
-  font-family: 'Quicksand', 'Roboto', sans-serif !important;
 }
+
+/* GRID DE TUTORES */
+
+.titulo-tutor {
+  margin-top: 85px; /* ou o valor que desejar */
+}
+
+
+.tutor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  max-width: 1100px;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+.tutor-card {
+  border: 2px solid #000;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  background: #fff;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.tutor-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.btn-agendar {
+  background-color: #0d6efd;
+  color: #fff;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.btn-agendar:hover {
+  background-color: #03a9f4;
+}
+
+
+/* BADGE SKILLS COINS — alinhado à direita, igual ao botão Voltar */
+.skillsCoinsBox {
+  position: absolute;
+  top: 90px;
+  right: 20px;        /* LADO OPOSTO AO BOTÃO VOLTAR */
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+
+  background: linear-gradient(180deg, #997300, #ffc000);
+  border: 2px solid #000;
+  border-radius: 40px;
+
+  padding: 10px 20px;     /* mesmo padding do botão Voltar */
+  font-size: 1.2rem;      /* proporcional ao Voltar */
+  font-weight: 700;
+  color: #fff;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: transform .2s, box-shadow .2s;
+}
+
+/* Remover interferência do Bootstrap dentro do badge */
+.skillsCoinsBox .badge {
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  color: inherit !important;
+  font-size: inherit !important;
+}
+
+/* HOVER igual ao botão Voltar */
+.skillsCoinsBox:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.20);
+}
+
+/* RESPONSIVO — exatamente igual ao botão Voltar */
+@media (max-width: 600px) {
+  .skillsCoinsBox {
+    padding: 10px 14px !important;
+    font-size: 1rem;
+  }
+}
+
+
+.voltar {
+  position: absolute;
+  top: 90px;            /* mesmo alinhamento vertical do badge */
+  left: 20px;           /* equivalente ao margin-right do badge */
+  z-index: 9999;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 40px;
+  padding: 10px 20px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  transition: transform .2s, box-shadow .2s;
+}
+
+.voltar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+
+/* Responsivo para telas pequenas */
+@media (max-width: 600px) {
+  .voltar {
+    padding: 10px 14px !important;
+    font-size: 1rem;
+  }
+}
+
+/* FADE-IN */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn 1s ease-in-out; }
+
+
+[vw-access-button] {
+    top: 10px !important;   /* sobe o botão */
+    right: 12px !important;     /* empurra um pouco para a direita */
+    
+}
+
 
 #modalBloqueio {
   display: none;
@@ -39,103 +178,6 @@ body {
   font-size: 1rem;
 }
 
-
-.navbar-brand img {
-  height: 40px;
-}
-
-
-
-
-
-/* Logo CENTRAL perfeita no desktop */
-@media (min-width: 992px) {
-  .navbar-brand {
-    position: absolute;
-    left: 46%;
-    transform: translateX(-50%);
-    z-index: 3; /* fica acima mas NÃO cobre conteúdo lateral */
-    pointer-events: none; /* não bloqueia clique nos links atrás */
-  }
-  .navbar-brand * {
-    pointer-events: auto; /* permite clicar na logo */
-  }
-}
-
-/* Mobile: logo vai para a direita */
-@media (max-width: 991px) {
-  .navbar-brand {
-    margin-left: auto !important;
-    margin-right: 10px !important;
-    position: static;
-    transform: none;
-
-     /* A navbar deixa de ter altura variável */
-  .navbar {
-    min-height: 70px !important;
-    position: relative;
-  }
-
-  /* Botão fica fixo independente da animação */
-  .nav-hamburger {
-    position: fixed !important;
-    top: 18px !important;
-    left: 12px !important;
-    transform: none !important;
-    z-index: 5000 !important;
-  }
-  }
-}
-
-/* CONTADOR */
-.badge {
-    background: linear-gradient(180deg, #997300, #ffc000) !important;
-    border: none !important;
-    color: #fff !important;
-    padding: 10px 18px;
-    border-radius: 20px;
-    font-weight: 600;
-    transition: opacity 0.3s ease;
-    padding: 15px 25px !important;
-    font-size: 22px !important;
-    border-radius: 40px !important;
-    margin-left: 80%;
-    margin-top: 70px;
-}
-
-.badge:hover { opacity: 0.85; }
-
-.content-box {
-  background: white;
-  border-radius: 16px;
-  padding: 30px;
-  max-width: 1100px;
-  margin: 40px auto;
-  animation: fadeIn 1s ease-in-out;
-}
-
-.tutor-card {
-  border: 2px solid black;
-  border-radius: 20px;
-  padding: 20px;
-  text-align: center;
-  background: #fff;
-  transition: transform 0.3s;
-}
-
-.tutor-card:hover { transform: scale(1.07); }
-
-.btn-agendar {
-  background-color: #0d6efd;
-  color: white;
-  border-radius: 10px;
-}
-
-.btn-agendar:hover {
-  background-color: #03a9f4;
-  color: rgb(255, 255, 255);
-}
-
 .horario-btn.ocupado {
   background-color: #ffb3b3 !important;
   border-color: #cc0000 !important;
@@ -145,96 +187,7 @@ body {
   opacity: 0.8;
 }
 
-.top-info {
-  position: absolute;
-  right: 30px;
-  top: 20px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.credit-box {
-  background: #ffd54f;
-  padding: 5px 15px;
-  border-radius: 20px;
-  font-weight: bold;
-}
-
-.modal-content {
-  border-radius: 20px;
-  border: 2px solid black;
-}
-
 .confirm-btn {
   background: linear-gradient(90deg, #673ab7, #03a9f4);
   border-radius: 10px;
-}
-
-/* ANIMAÇÕES */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.fade-in { animation: fadeIn 1s ease-in-out; }
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.slide-up { animation: slideUp 0.8s ease-out; }
-
-.modal-animate { animation: scaleIn 0.3s ease; }
-
-@keyframes scaleIn {
-  from { transform: scale(0.85); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-/* ====== CARROSSEL ====== */
-.carousel {
-  width: 100%;
-  max-width: 1000px;
-  overflow: hidden;
-}
-
-.carousel-track {
-  display: flex;
-  transition: transform 0.35s ease;
-  gap: 18px;
-  padding: 10px 0;
-}
-
-.col-card {
-  flex: 0 0 calc((100% - 36px) / 3); /* 3 cards visíveis */
-  display: flex;
-  justify-content: center;
-}
-
-.carousel-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-}
-
-/* Responsividade */
-@media (max-width: 900px) {
-  .col-card { flex: 0 0 calc((100% - 24px) / 2); } /* 2 visíveis */
-}
-@media (max-width: 600px) {
-  .col-card { flex: 0 0 100%; } /* 1 visível */
-}
-
-
-.voltar {
-  margin-top: -100px;
-  margin-left: 80px;
-  display: inline-flex;
-  align-items: center;
 }
