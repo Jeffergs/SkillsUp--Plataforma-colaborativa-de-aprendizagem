@@ -104,8 +104,9 @@ function carregarAulas() {
     div.innerHTML = `
       <div class="card mb-3">
         <div class="card-body">
-          <h5 class="text-danger mb-2">${aula.categoria}</h5>
+          <h5 class="text-danger mb-2">${aula.assunto}</h5>
           <p class="mb-1 text-muted">${aula.descricao}</p> 
+          <p class="mb-1 text-muted">${aula.categoria}</p> 
           <p class="mb-0">
             <strong><i class="bi bi-clock"></i> Horários:</strong>
             ${aula.horarios ? aula.horarios.join(" | ") : "Não definido"}
