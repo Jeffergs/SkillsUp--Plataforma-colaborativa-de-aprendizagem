@@ -179,5 +179,20 @@
 @media (max-width: 576px) {
     .card {
         padding: 20px !important;
+            #skillsCoinsBox {
+        margin-bottom: 70px;
+        margin-top: -20px !important;
+    }
     }
 }
+
+@media (max-width: 320px) {
+    .card {
+        padding: 20px !important;
+        #skillsCoinsBox {
+    margin-bottom: 3.5rem; /* empurra mais para baixo no mobile */
+    padding: 0.25rem 0.5rem;
+    }
+    }
+}
+

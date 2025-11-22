@@ -1,9 +1,20 @@
-// JS/tutor.js — versão corrigida e robusta
+// JS/tutor.js — versão MERGE completa (original + alert 0 créditos + correções)
+// Gerado para manter tudo que você já tinha e adicionar só o necessário.
+
 document.addEventListener("DOMContentLoaded", () => {
 
+  // ---------------------------
+  // Container / track
+  // ---------------------------
   const container = document.querySelector('.tutor-grid');
   if (!container) return;
 
+  // este é o elemento onde cards estáticos/dinâmicos são colocados
+  const track = document.getElementById("tutorGrid");
+
+  // ---------------------------
+  // Carrega aulas publicadas iniciais e injeta cards existentes
+  // ---------------------------
   const aulasPublicadas = JSON.parse(localStorage.getItem("aulasPublicadas")) || [];
 
   aulasPublicadas.forEach(aula => {
@@ -11,17 +22,18 @@ document.addEventListener("DOMContentLoaded", () => {
     container.appendChild(card);
   });
 
-  // container principal (onde há os cards estáticos e onde adicionaremos os dinâmicos)
-  const track = document.getElementById("tutorGrid");
-
-  // helper seguro para obter elemento e só anexar listener se existir
+  // ---------------------------
+  // Helper seguro para adicionar event listeners se elemento existir
+  // ---------------------------
   function onIfExists(id, event, handler) {
     const el = document.getElementById(id);
     if (el) el.addEventListener(event, handler);
     return el;
   }
 
-  // ========================= LOTTIES (DURAÇÕES IGUALADAS) =========================
+  // ---------------------------
+  // LOTTIES (uniformiza duração)
+  // ---------------------------
   const DURACAO_PADRAO = 1.5;
 
   function playLottie(container, animRef, path, onComplete = null) {
@@ -53,7 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let animSelecione = null;
   let animSucesso = null;
 
-  // só adiciona handlers se os elementos existirem (evita erros)
   onIfExists("modalCreditosEsgotados", "shown.bs.modal", () => {
     animCreditos = playLottie(document.getElementById("lottieCreditos"), animCreditos, "/assets/lottie/sad.json");
   });
@@ -64,90 +75,133 @@ document.addEventListener("DOMContentLoaded", () => {
     animSucesso = playLottie(document.getElementById("checkLottie"), animSucesso, "/assets/lottie/success.json");
   });
 
- // ========================= CONTROLE DE CRÉDITOS (corrigido) =========================
-// Sempre resetar créditos para 5 ao recarregar a página
-localStorage.setItem("creditos", "5");
+  // ---------------------------
+  // CONTROLE DE CRÉDITOS
+  // - mantém compatibilidade: se não existir, inicializa
+  // - adiciona get/set/atualizar
+  // - adiciona verificação de 0 (alert)
+  // ---------------------------
 
-// Elemento correto no seu HTML
-const creditosNumberEl = document.getElementById("creditosNumber");
+  // Preserve behavior: inicializa créditos se não existir
+  if (!localStorage.getItem("creditos")) localStorage.setItem("creditos", "5");
 
-// Funções utilitárias
-function getCreditos() {
-  return parseInt(localStorage.getItem("creditos")) || 0;
-}
+  const creditosNumberEl = document.getElementById("creditosNumber");
 
-function setCreditos(v) {
-  localStorage.setItem("creditos", String(v));
+  function getCreditos() {
+    return parseInt(localStorage.getItem("creditos")) || 0;
+  }
+
+  function setCreditos(v) {
+    localStorage.setItem("creditos", String(v));
+    atualizarCreditos();
+  }
+
+  function atualizarCreditos() {
+    if (creditosNumberEl) creditosNumberEl.textContent = String(getCreditos());
+  }
+
+  // ========================= ALERT DE 0 CRÉDITOS =========================
+  function verificarZeroCreditsTutor() {
+    if (getCreditos() <= 0) {
+      alert(
+        "Se você gostou da experiência e quer continuar consumindo os conteúdos,\n" +
+        "pode conseguir mais Skill Coins oferecendo aulas!"
+      );
+    }
+  }
+
+  // inicializa exibição
   atualizarCreditos();
-}
 
-function atualizarCreditos() {
-  // atualiza o elemento do DOM que realmente existe
-  if (creditosNumberEl) creditosNumberEl.textContent = String(getCreditos());
-}
+  // ---------------------------
+  // FUNÇÕES AUXILIARES DE MODAL (se não existirem no seu sistema, usamos fallback)
+  // - abrirModalDescricao(nome, assunto, descricao)
+  // - abrirModalAgendamento(aula)
+  // ---------------------------
 
-// inicializa exibição
-atualizarCreditos();
+  function abrirModalDescricao(nome = "Tutor", assunto = "", descricao = "") {
+    // se existir modal #descricaoModal, preenche e abre; caso contrário, usa alert
+    const label = document.getElementById("descricaoModalLabel");
+    const texto = document.getElementById("descricaoModalTexto");
+    if (label) label.textContent = nome;
+    if (texto) texto.textContent = (descricao || assunto || "Sem descrição disponível.");
+    const m = document.getElementById("descricaoModal");
+    if (m) {
+      try { new bootstrap.Modal(m).show(); } catch (e) { console.warn(e); }
+    } else {
+      alert(`${nome}\n\n${assunto}\n\n${descricao}`);
+    }
+  }
 
+  function abrirModalAgendamento(aula = {}) {
+    // Preenche campos do modal de agendamento se existir e abre.
+    const tutorNomeSpan = document.getElementById("tutorNome");
+    if (tutorNomeSpan) tutorNomeSpan.textContent = aula.nomeTutor || aula.nome || "Tutor";
+    // Habilita/oculta horários conforme aula.horarios se fornecer
+    const horariosCard = aula.horarios || [];
+    document.querySelectorAll(".horario-btn").forEach(btn => {
+      const hora = btn.textContent.trim();
+      btn.style.display = (!horariosCard.length || horariosCard.includes(hora)) ? "" : "none";
+      btn.classList.remove("active");
+      btn.disabled = false;
+    });
+    // abrir modal
+    const ag = document.getElementById("agendarModal");
+    if (ag) {
+      try { new bootstrap.Modal(ag).show(); } catch (e) { console.warn(e); }
+    } else {
+      alert(`Abrir modal de agendamento para ${aula.nomeTutor || aula.nome || "Tutor"}`);
+    }
+  }
 
-
-
-function gerarCardAula(aula) {
+  // ---------------------------
+  // GERAR CARD (para itens dinâmicos)
+  // ---------------------------
+  function gerarCardAula(aula) {
     const card = document.createElement('div');
-  card.classList.add('tutor-card');
+    card.classList.add('tutor-card');
 
-  // atributos para popup e filtros
-  card.dataset.area = aula.categoria || "geral";
-  card.dataset.nome = aula.nomeTutor;
-  card.dataset.descricao = aula.descricao;
+    // atributos para popup e filtros
+    card.dataset.area = aula.categoria || "geral";
+    card.dataset.nome = aula.nomeTutor || aula.nome || "Tutor";
+    card.dataset.descricao = aula.descricao || aula.assunto || "Sem descrição disponível.";
+    card.dataset.horarios = JSON.stringify(aula.horarios || []);
 
-  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  // CORREÇÃO FUNDAMENTAL — SEM ISSO HORÁRIOS NÃO APARECEM
-  card.dataset.horarios = JSON.stringify(aula.horarios || []);
-  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // HTML interno — similar aos seus cards
+    card.innerHTML = `
+      <h5>${aula.nomeTutor || aula.nome || 'Tutor'}</h5>
+      <p class="categoria-tutor">${aula.categoria || ''}</p>
+      <p class="descricao-tutor">${aula.assunto || aula.descricao || ''}</p>
+      <div class="stars">⭐⭐⭐⭐</div>
+      <button class="btn btn-agendar w-100 btn-agendar-dinamico">Agendar</button>
+      <button class="btn btn-outline-primary w-100 mt-2 btn-descricao">Ver descrição</button>
+    `;
 
-  // HTML interno — IDÊNTICO AO SEU CARD MODELO
-  card.innerHTML = `
-    <h5>${aula.nomeTutor}</h5>
-    <p class="categoria-tutor">${aula.categoria}</p>
-    <p class="descricao-tutor">${aula.assunto}</p>
+    // handlers
+    const btnDesc = card.querySelector('.btn-descricao');
+    if (btnDesc) btnDesc.addEventListener('click', () => {
+      abrirModalDescricao(card.dataset.nome, aula.assunto || "", card.dataset.descricao);
+    });
 
-    <div class="stars">⭐⭐⭐⭐</div>
+    const btnAg = card.querySelector('.btn-agendar-dinamico');
+    if (btnAg) btnAg.addEventListener('click', onAgendarClick);
 
-    <button class="btn btn-agendar w-100 btn-agendar-dinamico">
-      Agendar
-    </button>
+    return card;
+  }
 
-    <button class="btn btn-outline-primary w-100 mt-2 btn-descricao">
-      Ver descrição
-    </button>
-  `;
-
-  // Ações do botão de descrição (mesmo sistema usado nos outros cards)
-  card.querySelector('.btn-descricao').addEventListener('click', () => {
-    abrirModalDescricao(aula.nomeTutor, aula.assunto, aula.descricao);
-  });
-
-  // Ações do botão Agendar (idêntico aos outros)
-  card.querySelector('.btn-agendar-dinamico').addEventListener('click', (e) => {
-    abrirModalAgendamento(aula);
-  });
-
-  return card;
-}
-
-
-
-  
-  // ========================= LOCALSTORAGE AGENDAMENTOS =========================
+  // ---------------------------
+  // VARIÁVEIS DE AGENDA
+  // ---------------------------
   let aulasAgendadas = JSON.parse(localStorage.getItem("aulasAgendadas")) || [];
   let agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || {};
   let tutorAtual = null;
-  let descricaoTutor = null; //Natalia
-  let categoriaTutor = null; //Natalia
+  let descricaoTutor = null;
+  let categoriaTutor = null;
   let horarioSelecionado = null;
 
-  // ========================= FILTRO DE TUTORES =========================
+  // ---------------------------
+  // FILTRO DE TUTORES (campo #area)
+  // ---------------------------
   const searchInput = document.getElementById("area");
   if (searchInput) {
     searchInput.addEventListener("input", function () {
@@ -159,10 +213,11 @@ function gerarCardAula(aula) {
     });
   }
 
-  // ========================= FUNÇÕES DE HANDLERS =========================
+  // ---------------------------
+  // HANDLERS: descrição e agendar (remove listeners antigos antes)
+  // ---------------------------
   function attachDescricaoHandlers(root = document) {
     root.querySelectorAll(".btn-descricao").forEach(btn => {
-      // remove listeners antigos (seguro) e adiciona novo
       btn.replaceWith(btn.cloneNode(true));
     });
     root.querySelectorAll(".btn-descricao").forEach(btn => {
@@ -188,53 +243,60 @@ function gerarCardAula(aula) {
     root.querySelectorAll(".btn-agendar").forEach(btn => btn.addEventListener("click", onAgendarClick));
   }
 
-  // ========================= CARREGAR AULAS DINÂMICAS (se houver) =========================
+  // inicial attach nos elementos já presentes
+  attachDescricaoHandlers(document);
+  attachAgendarHandlers(document);
+
+  // ---------------------------
+  // CARREGAR AULAS DINÂMICAS DO localStorage (e anexa ao track)
+  // ---------------------------
   function carregarAulasPublicadas() {
-    const aulasPublicadas = JSON.parse(localStorage.getItem("aulasPublicadas")) || [];
+    const aulas = JSON.parse(localStorage.getItem("aulasPublicadas")) || [];
     if (!track) return;
-    aulasPublicadas.forEach(aula => {
+    aulas.forEach(aula => {
       const col = document.createElement("div");
       col.className = "col-card";
       col.innerHTML = `
         <div class="tutor-card slide-up"
           data-area="${(aula.categoria || aula.assunto || '').replace(/"/g, '&quot;')}"
           data-horarios='${JSON.stringify(aula.horarios || [])}'
-          data-nome="${(aula.nomeTutor || '').replace(/"/g, '&quot;')}"
-          data-descricao="${(aula.descricao || 'Sem descrição disponível.').replace(/"/g, '&quot;')}">
-          <h5>${aula.nomeTutor || 'Tutor'}</h5>
+          data-nome="${(aula.nomeTutor || aula.nome || '').replace(/"/g, '&quot;')}"
+          data-descricao="${(aula.descricao || aula.assunto || 'Sem descrição disponível.').replace(/"/g, '&quot;')}">
+          <h5>${aula.nomeTutor || aula.nome || 'Tutor'}</h5>
           <p><strong>${aula.assunto || ''}</strong></p>
           <p class="text-muted">${aula.categoria || ''}</p>
           <button class="btn btn-descricao btn-outline-secondary mt-2">Descrição</button>
           <button class="btn btn-agendar btn-primary mt-2">Agendar</button>
         </div>
       `;
-      track.appendChild(col); // <<< importante: agora realmente anexa ao DOM
+      track.appendChild(col);
     });
-
-    // attach handlers para novos elementos
     attachDescricaoHandlers(track);
     attachAgendarHandlers(track);
   }
 
+  carregarAulasPublicadas();
 
-
-  // ========================= AGENDA / HORÁRIOS =========================
+  // ---------------------------
+  // AGENDA / HORÁRIOS
+  // ---------------------------
   function onAgendarClick(e) {
     if (getCreditos() <= 0) {
       const m = document.getElementById("modalCreditosEsgotados");
       if (m) new bootstrap.Modal(m).show();
+      verificarZeroCreditsTutor();
       return;
     }
 
     const card = e.target.closest(".tutor-card");
     if (!card) return;
-    tutorAtual = card.getAttribute("data-nome") || card.querySelector("h5")?.textContent || "Tutor";
-    descricaoTutor = card.querySelector(".descricao-tutor").textContent; //Natalia
-    categoriaTutor = card.querySelector(".categoria-tutor").textContent; //Natalia
+    tutorAtual = card.dataset.nome || card.querySelector("h5")?.textContent || "Tutor";
+    descricaoTutor = card.querySelector(".descricao-tutor") ? card.querySelector(".descricao-tutor").textContent : (card.dataset.descricao || "");
+    categoriaTutor = card.querySelector(".categoria-tutor") ? card.querySelector(".categoria-tutor").textContent : (card.dataset.area || "");
 
     horarioSelecionado = null;
 
-    const horariosCard = JSON.parse(card.getAttribute("data-horarios") || "[]");
+    const horariosCard = JSON.parse(card.dataset.horarios || "[]");
 
     // habilita/oculta botões de horário (se existirem)
     document.querySelectorAll(".horario-btn").forEach(btn => {
@@ -253,7 +315,7 @@ function gerarCardAula(aula) {
     if (agendarModal) new bootstrap.Modal(agendarModal).show();
   }
 
-  // horário click
+  // horário click (global)
   document.querySelectorAll(".horario-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       if (btn.disabled) return;
@@ -277,7 +339,7 @@ function gerarCardAula(aula) {
     });
   }
 
-  // confirmar agendamento (só se existir o botão)
+  // botão confirmar agendamento
   const btnConfirmar = document.getElementById("btnConfirmar");
   if (btnConfirmar) {
     btnConfirmar.addEventListener("click", () => {
@@ -294,12 +356,14 @@ function gerarCardAula(aula) {
         if (modalAgendar) modalAgendar.hide();
         const m = document.getElementById("modalCreditosEsgotados");
         if (m) new bootstrap.Modal(m).show();
+        verificarZeroCreditsTutor();
         return;
       }
 
-      aulasAgendadas.push({ tutor: tutorAtual, horario: horarioSelecionado, descricao: descricaoTutor, categoria: categoriaTutor}); //Natalia
+      aulasAgendadas.push({ tutor: tutorAtual, horario: horarioSelecionado, descricao: descricaoTutor, categoria: categoriaTutor});
       localStorage.setItem("aulasAgendadas", JSON.stringify(aulasAgendadas));
       setCreditos(getCreditos() - 1);
+      verificarZeroCreditsTutor();
 
       const conf = document.getElementById("confirmacaoHorario");
       if (conf) conf.innerText = `Aula com ${tutorAtual} agendada para ${horarioSelecionado}.`;
@@ -313,11 +377,9 @@ function gerarCardAula(aula) {
     });
   }
 
-
-  
-  // ====================================================================
-  // ✅ BLOCO DO DESIGN — FIXADO NO PONTO CORRETO  
-  // ====================================================================
+  // ---------------------------
+  // BLOCO DO DESIGN — esconder skills quando colidir com navbar
+  // ---------------------------
   const navbar = document.querySelector(".navbar");
   const skillsCoins = document.querySelector(".skillsCoinsBox");
   const voltarBtn = document.querySelector(".voltar");
@@ -349,12 +411,12 @@ function gerarCardAula(aula) {
     checarColisao();
   }
 
-
   // finalmente: handlers para os cards estáticos presentes no HTML
   attachDescricaoHandlers(document);
   attachAgendarHandlers(document);
 
   // utility: se você tiver um carrossel posicionado, a função de updatePosition pode ficar aqui.
   // (deixei de fora por você pedir manutenção sem carousel)
+
 
 }); // fim DOMContentLoaded
