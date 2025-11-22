@@ -386,3 +386,114 @@
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
 }
 
+/* =====================================
+   AJUSTES SOMENTE PARA RESPONSIVIDADE
+   (não altera desktop)
+===================================== */
+
+/* MOBILE */
+@media (max-width: 575.98px) {
+
+  html, body { overflow-x: hidden; } /* evita corte lateral */
+
+  .hero-section{
+    padding-top: 120px;  /* espaço para navbar fixa */
+    padding-bottom: 60px;
+  }
+
+  .hero-inner{
+    max-width: 100%;
+    padding: 0 16px; /* respiro lateral */
+  }
+
+  /* títulos não estouram */
+  .hero-title-main,
+  .hero-title-secondary{
+    font-size: 1.7rem;
+    line-height: 1.25;
+    margin-bottom: 16px;
+    word-break: break-word;
+  }
+
+  /* texto mais compacto */
+  .hero-text{
+    font-size: .98rem;
+    line-height: 1.55;
+    margin-bottom: 20px;
+  }
+
+  /* botões em coluna */
+  .hero-buttons{
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+    margin-bottom: 26px;
+  }
+
+  .hero-btn{
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    padding: .9rem 1.2rem;
+    font-size: .9rem;
+  }
+
+  /* barra de progresso menor */
+  .carousel-progress{
+    width: 140px;
+    height: 5px;
+    margin: 14px auto 0;
+  }
+
+  /* indicadores mais acima (remove buraco branco) */
+  #heroCarousel .carousel-indicators{
+    bottom: -60px !important;
+  }
+
+  /* setas menores e menos invasivas */
+  #heroCarousel .carousel-control-prev,
+  #heroCarousel .carousel-control-next{
+    width: 36px !important;
+    height: 36px !important;
+    top: 55% !important;
+    border-radius: 10px !important;
+  }
+
+  #heroCarousel .carousel-control-prev{ left: 6px !important; }
+  #heroCarousel .carousel-control-next{ right: 6px !important; }
+
+  #heroCarousel .carousel-control-prev-icon,
+  #heroCarousel .carousel-control-next-icon{
+    width: 14px !important;
+    height: 14px !important;
+  }
+}
+
+
+/* TABLET / MOBILE GRANDE */
+@media (min-width: 576px) and (max-width: 991.98px) {
+
+  .hero-section{
+    padding-top: 120px;
+    padding-bottom: 70px;
+  }
+
+  .hero-inner{
+    padding: 0 22px;
+    max-width: 720px;
+  }
+
+  .hero-title-main,
+  .hero-title-secondary{
+    font-size: 2.2rem;
+  }
+
+  .hero-text{
+    font-size: 1.05rem;
+    margin-bottom: 24px;
+  }
+
+  #heroCarousel .carousel-indicators{
+    bottom: -90px !important;
+  }
+}
