@@ -143,6 +143,8 @@ function gerarCardAula(aula) {
   let aulasAgendadas = JSON.parse(localStorage.getItem("aulasAgendadas")) || [];
   let agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || {};
   let tutorAtual = null;
+  let descricaoTutor = null; //Natalia
+  let categoriaTutor = null; //Natalia
   let horarioSelecionado = null;
 
   // ========================= FILTRO DE TUTORES =========================
@@ -227,6 +229,9 @@ function gerarCardAula(aula) {
     const card = e.target.closest(".tutor-card");
     if (!card) return;
     tutorAtual = card.getAttribute("data-nome") || card.querySelector("h5")?.textContent || "Tutor";
+    descricaoTutor = card.querySelector(".descricao-tutor").textContent; //Natalia
+    categoriaTutor = card.querySelector(".categoria-tutor").textContent; //Natalia
+
     horarioSelecionado = null;
 
     const horariosCard = JSON.parse(card.getAttribute("data-horarios") || "[]");
@@ -292,7 +297,7 @@ function gerarCardAula(aula) {
         return;
       }
 
-      aulasAgendadas.push({ tutor: tutorAtual, horario: horarioSelecionado });
+      aulasAgendadas.push({ tutor: tutorAtual, horario: horarioSelecionado, descricao: descricaoTutor, categoria: categoriaTutor}); //Natalia
       localStorage.setItem("aulasAgendadas", JSON.stringify(aulasAgendadas));
       setCreditos(getCreditos() - 1);
 
