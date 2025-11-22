@@ -1,6 +1,6 @@
 /* --- seu CSS fornecido (mantive exatamente) --- */
 body {
-  background: linear-gradient(90deg, #673ab7, #03a9f4);
+   background: linear-gradient(90deg, rgba(102, 126, 234, 1) 0%, rgba(118, 75, 162, 1) 100%);
   min-height: 100vh;
 
   display: none; /* esconde conteúdo até verificação */
