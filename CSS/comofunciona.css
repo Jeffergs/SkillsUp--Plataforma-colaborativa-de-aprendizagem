@@ -152,6 +152,81 @@ h1 {
     font-size: 1rem;
 }
 
+.text-muted{
+    font-size: 18px !important;
+}
+
+.text-muted-white {
+    font-size: 18px !important;
+    color: white !important;
+}
+
+.flip-container {
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.flipper {
+    position: relative;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flip-container.flipped .flipper {
+    transform: rotateY(180deg);
+}
+
+.flip-card-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    padding: 30px;
+    text-align: center;
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+
+/* --- BOTÃO "+" --- */
+
+.flip-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border:none;
+    font-size: 20px;
+    line-height: 28px;
+    background: #6a11cb;
+    color: white;
+    transition: .2s;
+    cursor: pointer;
+}
+
+.flip-btn:hover {
+    transform: scale(1.15);
+}
+
+.flip-btn-roxo{
+        position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border:none;
+    font-size: 20px;
+    line-height: 28px;
+    background: white;
+        transition: .2s;
+    cursor: pointer;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
     h1 { font-size: 1.8rem; }
