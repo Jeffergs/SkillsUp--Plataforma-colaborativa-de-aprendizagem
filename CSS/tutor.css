@@ -61,10 +61,9 @@ h1 {
 
 /*       BOTÃO SKILLS COINS   */
 .skillsCoinsBox {
-  position: absolute; /* padrão para telas grandes */
+  position: absolute;
   top: 92px;
   right: 20px;
-  z-index: 9999;
   display: flex;
   align-items: center;
   background: linear-gradient(180deg, #997300, #ffc000);
@@ -131,8 +130,10 @@ h1 {
   display: none;
   position: fixed;
   z-index: 9999;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
   background-color: rgba(0,0,0,0.6);
   display: flex;
   justify-content: center;
@@ -159,34 +160,71 @@ h1 {
   font-size: 1rem;
 }
 
+
+/* Tablets e telas médias */
+@media (max-width: 768px) {
+  .skillsCoinsBox {
+    top: 80px;
+    right: 15px;
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+/* Smartphones */
 @media (max-width: 600px) {
-  .skillsCoinsBox{
+  .skillsCoinsBox {
+    position: relative !important;
+    top: 20 !important;
+    right: auto !important;
+    margin: 15px auto 20px auto;
+    max-width: 200px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .titulo-tutor {
     margin-top: 80px !important;
-    position: relative !important; 
-    top: auto !important;
-    right: 50px !important;
-    left: 60px !important;
-    margin: 10px 0; 
-    max-width: 200px !important;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tutor-grid {
+    margin-top: 30px !important;
+    padding: 0 15px;
   }
 
   .horario-btn {
     flex: 1 1 calc(50% - 10px);
   }
-
-  .titulo-tutor {
-    margin-top: 10px !important; /* garante que o título não seja coberto */
-  }
-
-  .tutor-grid {
-    margin-top: 60px !important;
+  
+  h1 {
+    font-size: 1.8rem;
+    text-align: center;
   }
 }
 
-/* Para telas muito pequenas (até 380px) */
 @media (max-width: 380px) {
+  .skillsCoinsBox {
+    max-width: 180px;
+    font-size: 0.95rem;
+    padding: 8px 14px;
+  }
+  
   .horario-btn {
     flex: 1 1 100%;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  .tutor-card {
+    padding: 15px;
   }
 }

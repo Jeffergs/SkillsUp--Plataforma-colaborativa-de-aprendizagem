@@ -83,5 +83,5 @@ console.log("[ofereca_aula.js] Aula publicada e disponível para tutor.html:", n
     console.error('[ofereca_aula.js] erro ao adicionar crédito:', err);
   }
 
-  alert('Aula publicada com sucesso! Você ganhou um crédito!');
+  alert('Aula publicada com sucesso! Você ganhou 1 Skills Coin!');
 }

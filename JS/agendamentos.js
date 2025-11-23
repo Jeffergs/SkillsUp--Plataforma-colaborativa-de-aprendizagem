@@ -7,7 +7,7 @@ function excluirAulaAgendada(index) {
 
     carregarAulasInscritas();
 
-    alert("Você perdeu um crédito!");
+    alert("Você perdeu 1 Skills Coin!");
     // --- AQUI: PERDE 1 CRÉDITO IGUAL A AULA PUBLICADA ---
     removerCreditos(1);
   }
@@ -22,7 +22,7 @@ function excluirAulaPublicada(index) {
 
     carregarAulasOferecidas();
 
-    alert("Você perdeu um crédito!");
+    alert("Você perdeu 1 Skills Coin!");
     removerCreditos(1);
   }
 }
