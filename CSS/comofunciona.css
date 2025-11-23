@@ -202,7 +202,7 @@ h1 {
     border:none;
     font-size: 20px;
     line-height: 28px;
-    background: #6a11cb;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     transition: .2s;
     cursor: pointer;
