@@ -2,12 +2,8 @@
 
 <h1 style="background:linear-gradient(90deg,#6a1b9a,#f57c00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">🌟 SkillsUp — Plataforma Colaborativa de Aprendizagem</h1>
 
-<p>🎥 <strong>Pitch (3 min):</strong> <a href="https://youtu.be/dwEGXdfLups" style="color:#f57c00;">Assista aqui</a></p>
-<p>📌 <strong>Prazo Total do Projeto:</strong> <span style="color:#0288d1;">2 semanas</span></p>
-<p>📌 <strong>Escopo:</strong> <span style="color:#0288d1;">Ideia + Figma + Modelagem + Pitch</span></p>
-
-<img src="./assets/banner-skillsup.png" width="900" alt="Banner SkillsUp (placeholder)">
-<p><em>⬆️ Placeholder — substitua pela imagem oficial do banner.</em></p>
+<p>🎥 <strong>Pitch (3 min):</strong> <a href="Colocar o link do pitch aqui" style="color:#f57c00;">Assista aqui</a></p>
+<p>📌 <strong>Prazo Total do Projeto:</strong> <span style="color:#0288d1;">13 dias</span></p>
 
 <p>🌐 <strong>Site Oficial:</strong> <a href="https://gs-global-solucion.vercel.app/" style="color:#43a047;">https://gs-global-solucion.vercel.app/</a></p>
 
@@ -34,7 +30,7 @@
 
 ## 💡 Descrição do Desafio
 
-<div style="background-color:#f3e5f5;padding:10px;border-radius:10px;">
+
 A FIAP propôs soluções para **repensar o futuro do trabalho**, com foco em:
 
 - 🔹 Aprendizagem contínua  
@@ -43,7 +39,6 @@ A FIAP propôs soluções para **repensar o futuro do trabalho**, com foco em:
 - 🔹 Bem-estar e saúde mental  
 - 🔹 IA como parceira estratégica  
 - 🔹 Novas formas de colaboração e carreira
-</div>
 
 ---
 
@@ -51,7 +46,6 @@ A FIAP propôs soluções para **repensar o futuro do trabalho**, com foco em:
 
 ### Problema Identificado
 
-<div style="background-color:#fff3e0;padding:10px;border-left:5px solid #fb8c00;border-radius:5px;">
 ⚠️ As habilidades do mercado mudam mais rápido do que a capacidade de aprendizado das pessoas:
 
 - **39% das competências essenciais** serão obsoletas até 2030  
@@ -59,13 +53,11 @@ A FIAP propôs soluções para **repensar o futuro do trabalho**, com foco em:
 - Acesso desigual ao aprendizado: muitos querem aprender, mas enfrentam barreiras
 
 > *Existe uma desconexão entre demanda de habilidades e oportunidades de desenvolvimento.*
-</div>
 
 ---
 
 ## 🌐 Solução Proposta — SkillsUp
 
-<div style="background-color:#e8f5e9;padding:10px;border-left:5px solid #43a047;border-radius:5px;">
 **SkillsUp** transforma conhecimento em oportunidade através de uma **economia colaborativa de créditos — SkillsCoins**.  
 💡 Ensinar gera créditos; consumir aulas consome créditos.
 
@@ -75,13 +67,10 @@ A FIAP propôs soluções para **repensar o futuro do trabalho**, com foco em:
 - ⚖️ Reduz desigualdades educacionais  
 - 🏆 Transforma aprendizado em capital social  
 - 🌐 Cria comunidades de crescimento conjunto
-</div>
 
 ---
 
 ## ⚡ Funcionalidades Principais
-
-<div style="background-color:#e3f2fd;padding:10px;border-left:5px solid #0288d1;border-radius:5px;">
 
 ### 💰 Sistema de Créditos — SkillsCoins
 - Visualização do saldo de créditos  
@@ -115,13 +104,11 @@ A FIAP propôs soluções para **repensar o futuro do trabalho**, com foco em:
 - Consome 1 SkillsCoin quando aplicável  
 - Feedback via animação Lottie  
 - Proteção de ações: login obrigatório
-</div>
 
 ---
 
 ## 🔄 Fluxos de Usuário
 
-<div style="background-color:#fce4ec;padding:10px;border-left:5px solid #e91e63;border-radius:5px;">
 1. **Onboarding → Perfil → Tela de Escolha**  
    - Preenche perfil → salva → recebe +5 SkillsCoins → redireciona para Tela de Escolha
 
@@ -131,7 +118,6 @@ A FIAP propôs soluções para **repensar o futuro do trabalho**, com foco em:
 
 3. **Tutor: Oferecer Aula → Publicar → Receber Agendamentos**  
    - Entrar em “Oferecer Aula” → preencher formulário → publicar → dashboard atualizado
-</div>
 
 ---
 
@@ -160,7 +146,6 @@ A FIAP propôs soluções para **repensar o futuro do trabalho**, com foco em:
 - Formulário de oferta de aula: `./assets/ofereca-aula.png`  
 - Grid de tutores & agendamento: `./assets/tutor-grid.gif`  
 
-> Protótipo Figma: insira link público do Figma quando disponível
 
 ---
 
@@ -173,21 +158,3 @@ A FIAP propôs soluções para **repensar o futuro do trabalho**, com foco em:
 | Natália Lugão | Product Designer & Front-End Developer |
 | Jefferson Gomes | Content Strategist & Front-End Developer |
 | Sophia Coelho | QA Engineer & Front-End Developer |
-
----
-
-## 🧑‍🏭 Minhas Contribuições
-
-- Modelagem de dados da solução  
-- Planejamento de telas e jornadas  
-- Identificação de atritos na jornada O2O  
-- Propostas de solução para melhorar experiência e reduzir barreiras  
-- Otimização do conteúdo textual e experiência do usuário
-
----
-
-## 💻 Como abrir o protótipo / páginas locais
-
-```bash
-git clone <seu-repo-url>
-# Abra index.html no navegador
