@@ -275,7 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
     attachAgendarHandlers(track);
   }
 
-  carregarAulasPublicadas();
+
 
   // ---------------------------
   // AGENDA / HORÁRIOS
