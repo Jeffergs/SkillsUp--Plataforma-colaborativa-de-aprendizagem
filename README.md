@@ -61,7 +61,7 @@ A FIAP propôs soluções para **repensar o futuro do trabalho**, com foco em:
 - 🤝 Estimula colaboração, empatia e comunicação  
 - ⚖️ Reduz desigualdades educacionais  
 - 🏆 Transforma aprendizado em capital social  
-- 🌐 Cria comunidades de crescimento conjunto
+- 🔗 Cria comunidades de crescimento conjunto
 
 ---
 
