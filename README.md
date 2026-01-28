@@ -145,3 +145,11 @@ A FIAP propôs soluções para **repensar o futuro do trabalho**, com foco em:
 | Natália Lugão | Product Designer & Front-End Developer |
 | Jefferson Gomes | Content Strategist & Front-End Developer |
 | Sophia Coelho | QA Engineer & Front-End Developer |
+
+<div>
+
+| [<img src="https://github.com/user-attachments/assets/854d6190-615a-4d46-a288-ee246228164b" width="100" height="100" alt="Jefferson Gomes"/>](https://github.com/Jeffergs) | [<img src="https://github.com/user-attachments/assets/5c7d887a-4067-458a-8501-2901ed503514" width="100" height="100" alt="Luiz Eduardo"/>](https://github.com/luizeduardotsdev) |
+|:---:|:---:|
+| [![Jefferson Gomes](https://img.shields.io/badge/Jefferson_Gomes-24292e?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Jeffergs) | [![Luiz Eduardo](https://img.shields.io/badge/Luiz_Eduardo-0d1117?style=for-the-badge&logo=github&logoColor=white)](https://github.com/luizeduardotsdev) |
+
+</div>
