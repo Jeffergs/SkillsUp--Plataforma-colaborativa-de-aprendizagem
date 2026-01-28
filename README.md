@@ -148,8 +148,11 @@ A FIAP propôs soluções para **repensar o futuro do trabalho**, com foco em:
 
 <div>
 
-| [<img src="https://github.com/user-attachments/assets/854d6190-615a-4d46-a288-ee246228164b" width="100" height="100" alt="Jefferson Gomes"/>](https://github.com/Jeffergs) | [<img width="100" height="100" alt="image" src="https://github.com/user-attachments/assets/7ca56d82-e940-4076-8689-80b23b0bde23" />](https://github.com/andrefxm)
+| [<img src="https://github.com/user-attachments/assets/854d6190-615a-4d46-a288-ee246228164b" width="100" height="100" alt="Jefferson Gomes"/>](https://github.com/Jeffergs) | [<img width="100" height="100" alt="image" src="https://github.com/user-attachments/assets/7ca56d82-e940-4076-8689-80b23b0bde23" />](https://github.com/andrefxm | 
 |:---:|:---:|
+https://avatars.githubusercontent.com/u/239153184?v=4
+https://avatars.githubusercontent.com/u/188492757?v=4
+https://avatars.githubusercontent.com/u/162128128?v=4
 | [![Jefferson Gomes](https://img.shields.io/badge/Jefferson_Gomes-24292e?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Jeffergs) | [![André Melo](https://img.shields.io/badge/Andre_Melo-0d1117?style=for-the-badge&logo=github&logoColor=white)](https://github.com/andrefxmv) |
 
 </div>
