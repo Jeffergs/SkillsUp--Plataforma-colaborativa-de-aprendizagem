@@ -14,14 +14,15 @@
 
 ## 📑 Índice
 
-1. [💡 Descrição do Desafio](#-Descrição-do-desafio)  
+1. [💡 Descrição do desafio](#-Descrição-do-desafio)  
 2. [🎯 Escolha do tema](#-Escolha-do-tema)  
-3. [🌐 Solução Proposta — SkillsUp](#-Solução-proposta--skillsup)  
-4. [⚡ Funcionalidades Principais](#-Funcionalidades-principais)  
-5. [🔄 Fluxos de Usuário](#-Fluxos-de-usuário)  
-6. [🎨 UX & Componentes Interativos](#-Ux--componentes-interativos)  
-7. [♿ Acessibilidade & Integrações](#-Acessibilidade--integrações)  
-8. [👥 Equipe](#-Equipe)  
+3. [🌐 Solução proposta — SkillsUp](#-Solução-proposta--skillsup)
+4. [💻 Tecnologias usadas](#-Tecnologias-usadas) 
+5. [⚡ Funcionalidades principais](#-Funcionalidades-principais)  
+6. [🔄 Fluxos de usuário](#-Fluxos-de-usuário)  
+7. [🎨 UX & componentes interativos](#-Ux--componentes-interativos)  
+8. [♿ Acessibilidade & integrações](#-Acessibilidade--integrações)  
+9. [👥 Equipe](#-Equipe)  
 
 ---
 
@@ -63,6 +64,13 @@ A FIAP propôs soluções para **repensar o futuro do trabalho**, com foco em:
 - ⚖️ Reduz desigualdades educacionais  
 - 🏆 Transforma aprendizado em capital social  
 - 🔗 Cria comunidades de crescimento conjunto
+
+---
+## 💻 Tecnologias utilizadas
+- 📄 HTML 5 para estruturar o conteúdo do site
+- 🎨 CSS 3 para personalizar alguns componentes do site e ajustes de responsividade
+- 🧩 Bootstrap 5.3 (framework CSS) para fazer a base da aparência e responsividade
+- 🧠 JavaScript para fazer a interatividade e dar dinamismo as páginas
 
 ---
 
