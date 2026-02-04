@@ -17,7 +17,7 @@
 1. [💡 Descrição do desafio](#-Descrição-do-desafio)  
 2. [🎯 Escolha do tema](#-Escolha-do-tema)  
 3. [🌐 Solução proposta — SkillsUp](#-Solução-proposta--skillsup)
-4. [💻 Tecnologias usadas](#-Tecnologias-utilizadas) 
+4. [💻 Tecnologias utilizadas](#-Tecnologias-utilizadas) 
 5. [⚡ Funcionalidades principais](#-Funcionalidades-principais)  
 6. [🔄 Fluxos de usuário](#-Fluxos-de-usuário)  
 7. [🎨 UX & componentes interativos](#-Ux--componentes-interativos)  
